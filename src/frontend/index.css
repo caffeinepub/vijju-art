@@ -1,0 +1,264 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+
+    /* ── Core Palette: Blush Rose Luxury ── */
+    --background: 0.98 0.006 10;
+    --foreground: 0.18 0.015 15;
+
+    --card: 0.99 0.004 8;
+    --card-foreground: 0.18 0.015 15;
+
+    --popover: 0.99 0.004 8;
+    --popover-foreground: 0.18 0.015 15;
+
+    /* Primary: deep rose */
+    --primary: 0.52 0.16 15;
+    --primary-foreground: 0.99 0.004 8;
+
+    /* Secondary: blush pink */
+    --secondary: 0.93 0.04 15;
+    --secondary-foreground: 0.35 0.08 15;
+
+    --muted: 0.95 0.02 12;
+    --muted-foreground: 0.55 0.04 12;
+
+    /* Accent: soft rose gold */
+    --accent: 0.88 0.06 20;
+    --accent-foreground: 0.35 0.1 15;
+
+    --destructive: 0.577 0.245 27.325;
+    --destructive-foreground: 0.985 0 0;
+
+    --border: 0.88 0.03 15;
+    --input: 0.9 0.025 15;
+    --ring: 0.52 0.16 15;
+
+    --chart-1: 0.646 0.222 41.116;
+    --chart-2: 0.6 0.118 184.704;
+    --chart-3: 0.398 0.07 227.392;
+    --chart-4: 0.828 0.189 84.429;
+    --chart-5: 0.769 0.188 70.08;
+
+    --sidebar: 0.985 0 0;
+    --sidebar-foreground: 0.145 0 0;
+    --sidebar-primary: 0.205 0 0;
+    --sidebar-primary-foreground: 0.985 0 0;
+    --sidebar-accent: 0.97 0 0;
+    --sidebar-accent-foreground: 0.205 0 0;
+    --sidebar-border: 0.922 0 0;
+    --sidebar-ring: 0.708 0 0;
+
+    /* Custom luxury tokens */
+    --rose-blush: 0.93 0.06 15;
+    --rose-deep: 0.52 0.16 15;
+    --rose-light: 0.96 0.03 12;
+    --rose-mid: 0.78 0.1 15;
+    --gold-accent: 0.82 0.09 60;
+    --cream: 0.975 0.012 50;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Segoe UI", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* ── Luxury Display Typography ── */
+.font-display {
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, Georgia, "Times New Roman", serif;
+}
+
+.font-serif-body {
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+/* ── Custom Scrollbar ── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: oklch(var(--rose-light));
+}
+::-webkit-scrollbar-thumb {
+  background: oklch(var(--rose-mid));
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: oklch(var(--rose-deep));
+}
+
+/* ── Fade in animation ── */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+.animate-delay-100 { animation-delay: 0.1s; opacity: 0; }
+.animate-delay-200 { animation-delay: 0.2s; opacity: 0; }
+.animate-delay-300 { animation-delay: 0.3s; opacity: 0; }
+.animate-delay-400 { animation-delay: 0.4s; opacity: 0; }
+.animate-delay-500 { animation-delay: 0.5s; opacity: 0; }
+.animate-delay-600 { animation-delay: 0.6s; opacity: 0; }
+.animate-delay-700 { animation-delay: 0.7s; opacity: 0; }
+
+/* ── Shimmer text ── */
+.shimmer-text {
+  background: linear-gradient(
+    90deg,
+    oklch(var(--rose-deep)) 0%,
+    oklch(var(--gold-accent)) 30%,
+    oklch(var(--rose-deep)) 60%,
+    oklch(var(--rose-mid)) 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 4s linear infinite;
+}
+
+/* ── Gallery hover ── */
+.gallery-card {
+  overflow: hidden;
+  position: relative;
+}
+
+.gallery-card img {
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform-origin: center;
+}
+
+.gallery-card:hover img {
+  transform: scale(1.08);
+}
+
+.gallery-card .overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, oklch(0.18 0.08 15 / 0.85) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  display: flex;
+  align-items: flex-end;
+  padding: 1.5rem;
+}
+
+.gallery-card:hover .overlay {
+  opacity: 1;
+}
+
+/* ── Decorative divider ── */
+.divider-rose {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.divider-rose::before,
+.divider-rose::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    oklch(var(--rose-mid)),
+    transparent
+  );
+}
+
+/* ── Section reveal ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.75s ease, transform 0.75s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ── Luxury button ── */
+.btn-luxury {
+  background: linear-gradient(135deg, oklch(var(--rose-deep)) 0%, oklch(var(--rose-mid)) 100%);
+  color: white;
+  border: none;
+  position: relative;
+  overflow: hidden;
+}
+.btn-luxury::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 40%, oklch(1 0 0 / 0.15) 100%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.btn-luxury:hover::after {
+  opacity: 1;
+}
+
+/* ── Nav blur ── */
+.nav-blur {
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+}
+
+/* ── Input luxury styling ── */
+.input-luxury {
+  border-color: oklch(var(--border));
+  background: oklch(var(--card));
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.input-luxury:focus {
+  border-color: oklch(var(--rose-mid));
+  box-shadow: 0 0 0 3px oklch(var(--rose-mid) / 0.2);
+  outline: none;
+}
+
+/* ── Hide scrollbar utility ── */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
